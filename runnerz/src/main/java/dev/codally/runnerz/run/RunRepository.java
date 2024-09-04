@@ -2,6 +2,7 @@ package dev.codally.runnerz.run;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -26,6 +27,22 @@ public class RunRepository {
 
     void create(Run run) {
         runs.add(run);
+    }
+
+
+    void update(@RequestBody Run run, Integer id){
+        Optional<Run> existingRun = findById(id);
+        if(existingRun.isPresent()){
+            runs.set(runs.indexOf(existingRun.get()), run);
+        }
+    }
+
+    void delete(Integer id) {
+//        Optional<Run> existingRun = findById(id);
+//        if(existingRun.isPresent()){
+//            runs.remove(existingRun.get());
+//        }
+        runs.removeIf(run -> run.id().equals(id));
     }
 
     @PostConstruct
