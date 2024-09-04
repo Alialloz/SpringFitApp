@@ -23,7 +23,7 @@ public record Run(
             throw new IllegalArgumentException("Start date must be before completed date");
         }
         // name not empty
-        
+
     }
 
 }
