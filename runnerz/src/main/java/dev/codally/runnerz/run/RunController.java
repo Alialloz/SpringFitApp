@@ -29,7 +29,7 @@ public class RunController {
         Optional<Run> run = runRepository.findById(id);
 
         if(run.isEmpty()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Run not found");
+            throw new RunNotFoundException();
 
         }
         return run.get();
@@ -51,7 +51,7 @@ public class RunController {
 
     // Delete
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("{/{id}}")
+    @DeleteMapping("/{id}")
     void delete(@PathVariable Integer id){
         runRepository.delete(id);
     }
